@@ -1,0 +1,14 @@
+config:
+  target: "http://localhost:5000"
+  phases:
+    - duration: 240
+      arrivalRate: 500
+scenarios:
+  - name: "Arrive to PDP and get data for component to render"
+    flow:
+      - get:
+          url: "/api/product/{{ $randomNumber(1,10000000) }}/reviews_top8/recent"
+      - get:
+          url: "/api/product/{{ $randomNumber(1,10000000) }}/summary_engagements"
+      - get:
+          url: "/api/product/{{ $randomNumber(1,10000000) }}/pictures"
