@@ -3,8 +3,17 @@ require('newrelic');
 const express = require('express');
 const compression = require('compression');
 const cors = require('cors');
-
+const proxy = require('http-proxy-middleware');
 const app = express();
+
+const myProxy = proxy(['/'], {
+  target: 'http://localhost:3008',
+  changeOrigin: true,
+  xfwd: true
+});
+app.use(myProxy);
+
+
 
 app.use(compression());
 app.use(cors());
